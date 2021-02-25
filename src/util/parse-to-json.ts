@@ -6,7 +6,7 @@ const decodeHTML = function(str: string) {
         if ($1[0] === "#") {
             return String.fromCharCode($1[1].toLowerCase() === "x" ? parseInt($1.substr(2), 16)  : parseInt($1.substr(1), 10));
         } else {
-            return map.hasOwnProperty($1) ? map[$1] : $0;
+            return map.hasOwnProperty($1) ? (map as any)[$1] : $0;
         }
     });
 };
@@ -52,7 +52,6 @@ export function parseToJson(root_elm: HTMLElement) {
 			} else if ((elm as any).rawTagName == 'figure') {
 				const elm_html = <HTMLElement><unknown>elm
 				const img = elm_html.querySelector('img')
-				console.log(img)
 				if (img != null) {
 					view.doc_content.push({
 						type: 'img',
